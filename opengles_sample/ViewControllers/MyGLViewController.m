@@ -16,13 +16,12 @@ NSString *const VertexShaderSourceCode = SHADER_SOURCE
 (
  attribute vec3 position;
  attribute vec2 aTexCoord;
- varying vec4 vertexColor;
+
  varying vec2 TexCoord;
  
  void main()
  {
     gl_Position = vec4(position, 1.0);
-    vertexColor = vec4(0.5, 0.0, 0.0, 0.1);
     TexCoord = aTexCoord;
  }
 );
@@ -30,13 +29,16 @@ NSString *const VertexShaderSourceCode = SHADER_SOURCE
 NSString *const FragmentShaderSourceCode = SHADER_SOURCE
 (
  precision highp float;
- varying highp vec4 vertexColor;
+
  varying highp vec2 TexCoord;
- uniform sampler2D aTexture;
+ uniform sampler2D aTexture0;
+ uniform sampler2D aTexture1;
 
  void main()
  {
-    gl_FragColor = texture2D(aTexture, TexCoord);
+    vec4 color0 = texture2D(aTexture0, TexCoord);
+    vec4 color1 = texture2D(aTexture1, TexCoord);
+    gl_FragColor = mix(color0, color1, color1.a);
 }
 );
 
@@ -77,6 +79,11 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
                                                    andFragmentShaderSource:FragmentShaderSourceCode];
     [_shaderProgram link];
     [_shaderProgram use];
+    
+    int sampler0 = [_shaderProgram getUniformLocation:@"aTexture0"];
+    int sampler1 = [_shaderProgram getUniformLocation:@"aTexture1"];
+    glUniform1i(sampler0, 0);
+    glUniform1i(sampler1, 1);
 }
 
 - (void)mglView:(MGLView *)glView drawInRect:(CGRect)rect {
@@ -105,24 +112,23 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
     glEnableVertexAttribArray(coordlocation);
     glVertexAttribPointer(coordlocation, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     
-    UIImage *image = [UIImage imageNamed:@"leaf.jpeg"];
-    GLuint texture = createTextureWithCGImage(image.CGImage);
-
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    int l = [_shaderProgram getUniformLocation:@"aTexture"];
-    glUniform1i(l, 0);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
+    UIImage *image0 = [UIImage imageNamed:@"leaf.jpeg"];
+    GLuint texture0 = createTextureWithCGImage(image0.CGImage);
+    UIImage *image1 = [UIImage imageNamed:@"beetle.png"];
+    GLuint texture1 = createTextureWithCGImage(image1.CGImage);
     
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture0);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
-    glDeleteTextures(1, &texture);
-    glBindVertexArray(0);
+    glDeleteTextures(1, &texture0);
+    glDeleteTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, 0);
     glDeleteBuffers(1, &vertexbuffer);
-    
+
 }
 
 @end
