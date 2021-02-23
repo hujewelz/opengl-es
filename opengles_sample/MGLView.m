@@ -108,7 +108,6 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
     [EAGLContext setCurrentContext:context];
     
     _shaderProgram = [[ShaderProgram alloc] initWithVertexShaderSource:VertexShaderSourceCode andFragmentShaderSource:FragmentShaderSourceCode];
-//    _shaderProgram = [ShaderProgram shaderWithVertexShaderFilename:@"core.vsh" andFragmentShaderFile:@"core.fsh"];
     [_shaderProgram link];
     [_shaderProgram use];
     [self createFrameBuffer];
