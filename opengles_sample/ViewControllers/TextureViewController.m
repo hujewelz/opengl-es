@@ -58,10 +58,10 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     static float vertices[] = {
-        -1.0f,  1.0f, 0.0f, 0.0f, 1.0f, // 左上角
-        -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // 右下角
-         1.0f,  1.0f, 0.0f, 1.0f, 1.0f, // 右上角
-         1.0f, -1.0f, 0.0f, 1.0f, 0.0f, // 右下角
+        -1.0f,  0.5f, 0.0f, 0.0f, 1.0f, // 左上角
+        -1.0f, -0.5f, 0.0f, 0.0f, 0.0f, // 右下角
+         1.0f,  0.5f, 0.0f, 1.0f, 1.0f, // 右上角
+         1.0f, -0.5f, 0.0f, 1.0f, 0.0f, // 右下角
     };
     
     GLuint vertexbuffer;
