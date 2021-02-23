@@ -205,9 +205,9 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
     glBindTexture(GL_TEXTURE_2D, texture);
 
     int l = [_shaderProgram getUniformLocation:@"aTexture"];
+    glUniform1i(l, 0);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
-    glUniform1i(l, 0);
 
     [self setupVertex];
 

@@ -11,7 +11,10 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-@interface TextureViewController ()
+@interface TextureViewController () {
+    GLKTextureInfo *textureInfo1;
+    GLKTextureInfo *textureInfo2;
+}
 
 @property (nonatomic, strong) GLKBaseEffect *baseEffect;
 @property (nonatomic, readonly, strong) EAGLContext *context;
@@ -40,16 +43,19 @@
     
     CGImageRef imageRef = [UIImage imageNamed:@"leaf.jpeg"].CGImage;
     NSDictionary *opts = @{GLKTextureLoaderOriginBottomLeft: @(YES)};
-    GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithCGImage:imageRef options:opts error:NULL];
-    self.baseEffect.texture2d0.name = textureInfo.name;
-    self.baseEffect.texture2d0.target = textureInfo.target;
+    textureInfo1 = [GLKTextureLoader textureWithCGImage:imageRef options:opts error:NULL];
+    
+    CGImageRef imageRef2 = [UIImage imageNamed:@"beetle.png"].CGImage;
+    textureInfo2 = [GLKTextureLoader textureWithCGImage:imageRef2 options:opts error:NULL];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
-    [self.baseEffect prepareToDraw];
-    
     glClearColor(0.2, 0.3, 0.3, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
+    // 开启混合
+    glEnable(GL_BLEND);
+    // 设置混合函数
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     static float vertices[] = {
         -1.0f,  1.0f, 0.0f, 0.0f, 1.0f, // 左上角
@@ -69,6 +75,16 @@
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3*sizeof(float)));
     
+    // 绘制叶子
+    self.baseEffect.texture2d0.name = textureInfo1.name;
+    self.baseEffect.texture2d0.target = textureInfo1.target;
+    [self.baseEffect prepareToDraw];
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
+    // 绘制虫子
+    self.baseEffect.texture2d0.name = textureInfo2.name;
+    self.baseEffect.texture2d0.target = textureInfo2.target;
+    [self.baseEffect prepareToDraw];
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
     glDeleteBuffers(1, &vertexbuffer);
