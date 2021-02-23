@@ -6,48 +6,23 @@
 //
 
 #import "MGLView.h"
-#import "ShaderProgram.h"
-#import "GLTool.h"
 @import OpenGLES;
-
-NSString *const VertexShaderSourceCode = SHADER_SOURCE
-(
- attribute vec3 position;
- attribute vec2 aTexCoord;
- varying vec4 vertexColor;
- varying vec2 TexCoord;
- 
- void main()
- {
-    gl_Position = vec4(position, 1.0);
-    vertexColor = vec4(0.5, 0.0, 0.0, 0.1);
-    TexCoord = aTexCoord;
- }
-);
-
-NSString *const FragmentShaderSourceCode = SHADER_SOURCE
-(
- precision highp float;
- varying highp vec4 vertexColor;
- varying highp vec2 TexCoord;
- uniform sampler2D aTexture;
-
- void main()
- {
-    gl_FragColor = texture2D(aTexture, TexCoord);
-}
-);
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 @implementation MGLView {
-    EAGLContext *_context;
-    ShaderProgram *_shaderProgram;
     GLuint _frameBuffer;
     GLuint _renderBuffer;
     CGSize _sizeAfterFrameBufferCreated;
-    GLuint vao, vbo;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame context:(EAGLContext *)context {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.context = context;
+    }
+    return self;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -70,6 +45,10 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
 
 - (void)dealloc {
     [self destoryFramebuffer];
+    if ([EAGLContext currentContext] == _context) {
+        [EAGLContext setCurrentContext:nil];
+    }
+    _context = nil;
 }
 
 + (Class)layerClass {
@@ -84,10 +63,22 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    if (/*!CGSizeEqualToSize(self.frame.size, _sizeAfterFrameBufferCreated) &&*/
+    if (!CGSizeEqualToSize(self.frame.size, _sizeAfterFrameBufferCreated) &&
         !CGSizeEqualToSize(self.frame.size, CGSizeZero)) {
         [self destoryFramebuffer];
         [self createFrameBuffer];
+    }
+}
+
+- (void)setContext:(EAGLContext *)context {
+    if (_context != context) {
+        [self destoryFramebuffer];
+        
+        _context = context;
+        
+        if (_context) {
+            [self createFrameBuffer];
+        }
     }
 }
 
@@ -99,19 +90,6 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
         kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8
     };
     [gllayer setDrawableProperties:props];
-    
-    EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    if (!context) {
-        context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    }
-    _context = context;
-    [EAGLContext setCurrentContext:context];
-    
-    _shaderProgram = [[ShaderProgram alloc] initWithVertexShaderSource:VertexShaderSourceCode andFragmentShaderSource:FragmentShaderSourceCode];
-    [_shaderProgram link];
-    [_shaderProgram use];
-    [self createFrameBuffer];
-//    [self setupVertex];
 }
 
 - (void)createFrameBuffer {
@@ -159,74 +137,24 @@ NSString *const FragmentShaderSourceCode = SHADER_SOURCE
     return (NSInteger)height;
 }
 
-- (void)setupVertex {
-    static float vertices[] = {
-        -1.0f,  1.0f, 0.0f, 0.0f, 1.0f, // 左上角
-        -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // 右下角
-         1.0f,  1.0f, 0.0f, 1.0f, 1.0f, // 右上角
-         1.0f, -1.0f, 0.0f, 1.0f, 0.0f, // 右下角
-    };
-    
-//    glGenVertexArrays(1, &vao);
-//    glBindVertexArray(vao);
-//
-    glGenBuffers(1, &vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    
-    
-    GLuint vlocation = [_shaderProgram getAttributeLocation:@"position"];
-    GLuint coordlocation = [_shaderProgram getAttributeLocation:@"aTexCoord"];
-    
-    glEnableVertexAttribArray(vlocation);
-    glVertexAttribPointer(vlocation, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
-    
-    glEnableVertexAttribArray(coordlocation);
-    glVertexAttribPointer(coordlocation, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-    
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
-////    glBindVertexArray(0);
-//    glDisableVertexAttribArray(0);
-//    glDisableVertexAttribArray(1);
-}
-
-
 - (void)display {
     [EAGLContext setCurrentContext:_context]; 
     glViewport(0, 0, (GLsizei)self.drawalbeWidth, (GLsizei)self.drawalbeHeight);
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-//    glBindVertexArray(vao);
-
-    UIImage *image = [UIImage imageNamed:@"leaf.jpeg"];
-    GLuint texture = createTextureWithCGImage(image.CGImage);
-
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    int l = [_shaderProgram getUniformLocation:@"aTexture"];
-    glUniform1i(l, 0);
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    [self setupVertex];
-
-    
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+   
     [self drawRect:self.bounds];
     [_context presentRenderbuffer:GL_RENDERBUFFER];
-    glDeleteTextures(1, &texture);
-    glBindVertexArray(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    glDeleteBuffers(1, &vbo);
 }
 
 - (void)destoryFramebuffer {
-    glDeleteFramebuffers(1, &_frameBuffer);
-    _frameBuffer = 0;
+    if (!_frameBuffer) {
+        glDeleteFramebuffers(GL_FRAMEBUFFER, &_frameBuffer);
+        _frameBuffer = 0;
+    }
     
-    glDeleteRenderbuffers(1, &_renderBuffer);
-    _renderBuffer = 0;
+    if (!_renderBuffer) {
+        glDeleteRenderbuffers(GL_RENDERBUFFER, &_renderBuffer);
+        _renderBuffer = 0;
+    }
 }
 
 #pragma clang diagnostic pop

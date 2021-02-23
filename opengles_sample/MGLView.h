@@ -7,7 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define GLES_SILENCE_DEPRECATION
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 NS_ASSUME_NONNULL_BEGIN
 
 @class MGLView;
@@ -21,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MGLView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame context:(EAGLContext *)context;
+
+@property(nonatomic, strong) EAGLContext *context;
 @property(nonatomic, readonly, assign) NSInteger drawalbeWidth;
 @property(nonatomic, readonly, assign) NSInteger drawalbeHeight;
 @property(nonatomic, weak) id<MGLViewDelegate> delegate;
@@ -30,3 +34,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+#pragma clang diagnostic pop

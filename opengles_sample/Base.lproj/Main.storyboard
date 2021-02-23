@@ -27,7 +27,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用纹理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wd-84-auX">
-                                                    <rect key="frame" x="35" y="12.5" width="304" height="19.5"/>
+                                                    <rect key="frame" x="35" y="12.5" width="344" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -41,6 +41,30 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="fqR-eH-g1M" kind="show" id="F3j-KA-68o"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="AhF-2Q-eWe">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AhF-2Q-eWe" id="Aeg-F7-hAD">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用自定义 GLView 绘制纹理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0L-nH-KEe">
+                                                    <rect key="frame" x="35" y="12" width="344" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="n0L-nH-KEe" firstAttribute="centerY" secondItem="Aeg-F7-hAD" secondAttribute="centerY" id="SIc-oU-wZJ"/>
+                                                <constraint firstItem="n0L-nH-KEe" firstAttribute="leading" secondItem="Aeg-F7-hAD" secondAttribute="leadingMargin" constant="15" id="VMA-dQ-jWg"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="n0L-nH-KEe" secondAttribute="trailing" constant="15" id="f5h-0O-XXg"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="Esb-ep-WNs"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -57,10 +81,26 @@
             </objects>
             <point key="canvasLocation" x="202.89855072463769" y="118.52678571428571"/>
         </scene>
-        <!--Texture View Controller-->
+        <!--View Controller-->
+        <scene sceneID="gjp-eH-3Ja">
+            <objects>
+                <viewController id="k0j-T2-Yxc" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eyi-1W-klN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="biD-2b-puo"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="cWm-ky-g9g"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9H1-P2-Q3U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="219" y="867"/>
+        </scene>
+        <!--MyGL View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="TextureViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MyGLViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1016" y="825"/>
+            <point key="canvasLocation" x="1167" y="579"/>
         </scene>
         <!--GLKit View Controller-->
         <scene sceneID="xW0-aB-bDn">
@@ -89,7 +129,7 @@
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7I6-7n-jI6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1033" y="119"/>
+            <point key="canvasLocation" x="1168" y="-76"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ucc-Z0-zBW">
