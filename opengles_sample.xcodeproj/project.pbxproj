@@ -22,7 +22,7 @@
 		C22E0C4B25E39A5F0031562D /* leaf.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C22E0C4A25E39A5F0031562D /* leaf.jpeg */; };
 		C22E0C5225E49B010031562D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22E0C5125E49B010031562D /* MainViewController.swift */; };
 		C22E0C5725E49CEF0031562D /* TextureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22E0C5625E49CEF0031562D /* TextureViewController.m */; };
-		C22E0C6125E4B9CB0031562D /* beetle.png in Resources */ = {isa = PBXBuildFile; fileRef = C22E0C6025E4B9CB0031562D /* beetle.png */; };
+		C25F609F2639100500741FA8 /* beetle.png in Resources */ = {isa = PBXBuildFile; fileRef = C25F609E2639100500741FA8 /* beetle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +52,7 @@
 		C22E0C5125E49B010031562D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C22E0C5525E49CEF0031562D /* TextureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureViewController.h; sourceTree = "<group>"; };
 		C22E0C5625E49CEF0031562D /* TextureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextureViewController.m; sourceTree = "<group>"; };
-		C22E0C6025E4B9CB0031562D /* beetle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beetle.png; path = ../../../Downloads/beetle.png; sourceTree = "<group>"; };
+		C25F609E2639100500741FA8 /* beetle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beetle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +104,8 @@
 				C211408D25E0B467009C26FC /* ShaderProgram.m */,
 				C211409525E0F25C009C26FC /* core.vsh */,
 				C211409825E0F26A009C26FC /* core.fsh */,
-				C22E0C6025E4B9CB0031562D /* beetle.png */,
 				C22E0C4A25E39A5F0031562D /* leaf.jpeg */,
+				C25F609E2639100500741FA8 /* beetle.png */,
 				C22E0C5025E49B010031562D /* opengles_sample-Bridging-Header.h */,
 			);
 			path = opengles_sample;
@@ -190,7 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C211407725E0B03F009C26FC /* LaunchScreen.storyboard in Resources */,
-				C22E0C6125E4B9CB0031562D /* beetle.png in Resources */,
+				C25F609F2639100500741FA8 /* beetle.png in Resources */,
 				C211407425E0B03F009C26FC /* Assets.xcassets in Resources */,
 				C22E0C4B25E39A5F0031562D /* leaf.jpeg in Resources */,
 				C211409925E0F26A009C26FC /* core.fsh in Resources */,
