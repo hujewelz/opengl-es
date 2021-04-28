@@ -23,6 +23,7 @@
 		C22E0C5225E49B010031562D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22E0C5125E49B010031562D /* MainViewController.swift */; };
 		C22E0C5725E49CEF0031562D /* TextureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C22E0C5625E49CEF0031562D /* TextureViewController.m */; };
 		C25F609F2639100500741FA8 /* beetle.png in Resources */ = {isa = PBXBuildFile; fileRef = C25F609E2639100500741FA8 /* beetle.png */; };
+		C25F60A32639145D00741FA8 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C25F60A22639145D00741FA8 /* VideoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		C22E0C5525E49CEF0031562D /* TextureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureViewController.h; sourceTree = "<group>"; };
 		C22E0C5625E49CEF0031562D /* TextureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextureViewController.m; sourceTree = "<group>"; };
 		C25F609E2639100500741FA8 /* beetle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beetle.png; sourceTree = "<group>"; };
+		C25F60A12639145D00741FA8 /* VideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
+		C25F60A22639145D00741FA8 /* VideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				C22E0C5125E49B010031562D /* MainViewController.swift */,
 				C22E0C5525E49CEF0031562D /* TextureViewController.h */,
 				C22E0C5625E49CEF0031562D /* TextureViewController.m */,
+				C25F60A12639145D00741FA8 /* VideoViewController.h */,
+				C25F60A22639145D00741FA8 /* VideoViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 			files = (
 				C22E0C5225E49B010031562D /* MainViewController.swift in Sources */,
 				C211408825E0B061009C26FC /* MGLView.m in Sources */,
+				C25F60A32639145D00741FA8 /* VideoViewController.m in Sources */,
 				C22E0C5725E49CEF0031562D /* TextureViewController.m in Sources */,
 				C211406F25E0B03E009C26FC /* MyGLViewController.m in Sources */,
 				C211406925E0B03E009C26FC /* AppDelegate.m in Sources */,

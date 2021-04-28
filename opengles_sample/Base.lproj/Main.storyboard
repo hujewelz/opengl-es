@@ -67,6 +67,30 @@
                                             <segue destination="BYZ-38-t0r" kind="show" id="Esb-ep-WNs"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0wZ-k7-G3v">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0wZ-k7-G3v" id="gtw-5r-FrG">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="将相机输出到自定义 GLView " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blp-Ox-mhb">
+                                                    <rect key="frame" x="35" y="12" width="344" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="blp-Ox-mhb" secondAttribute="trailing" constant="15" id="4bc-sy-ijA"/>
+                                                <constraint firstItem="blp-Ox-mhb" firstAttribute="leading" secondItem="gtw-5r-FrG" secondAttribute="leadingMargin" constant="15" id="CAz-Ny-ONX"/>
+                                                <constraint firstItem="blp-Ox-mhb" firstAttribute="centerY" secondItem="gtw-5r-FrG" secondAttribute="centerY" id="Vle-lm-9GK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="k0j-T2-Yxc" kind="show" id="05c-lV-fyV"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -81,10 +105,10 @@
             </objects>
             <point key="canvasLocation" x="202.89855072463769" y="118.52678571428571"/>
         </scene>
-        <!--View Controller-->
+        <!--Video View Controller-->
         <scene sceneID="gjp-eH-3Ja">
             <objects>
-                <viewController id="k0j-T2-Yxc" sceneMemberID="viewController">
+                <viewController id="k0j-T2-Yxc" customClass="VideoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Eyi-1W-klN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
